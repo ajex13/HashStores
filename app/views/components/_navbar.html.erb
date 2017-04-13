@@ -12,6 +12,9 @@
       <ul class="nav navbar-nav">
         <li><a href="#" data-toggle="modal" data-target="#aboutModal" >About</a></li>
         <li><a href="#" data-toggle="modal" data-target="#contactModal">Contact</a></li>
+        <% if user_signed_in? %>
+        <li> <%= link_to current_user.username, "#" %></li>
+        <% end %>
 
 
       </ul>

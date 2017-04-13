@@ -5,7 +5,7 @@ class StoresController < ApplicationController
   # GET /stores
   # GET /stores.json
   def index
-    if params[:search].present?
+    if params[:search]
 
 
         @stores = Store.all.where('lower(city) = ?',"#{params[:search].downcase}")
