@@ -31,7 +31,12 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'devise', '~> 4.2', '>= 4.2.1'
+gem 'devise-bootstrapped', '~> 0.1.1'
+gem 'font-awesome-sass'
+gem 'faker', '~> 1.7', '>= 1.7.3'
+gem 'will_paginate', '~> 3.1', '>= 3.1.5'
+gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
