@@ -1,4 +1,5 @@
 class StoresController < ApplicationController
+  before_action :authenticate_user!, except: [:index,:show]
   before_action :set_store, only: [:show, :edit, :update, :destroy]
 
   # GET /stores
@@ -7,9 +8,10 @@ class StoresController < ApplicationController
     if params[:search].present?
 
 
-        @stores = Store.all.where('city = ?',"#{params[:search]}")
-        unless Store.pluck(:city).include? "#{params[:search]}"
-           flash[:notice] = "No stores for the city '#{params[:search]}' yet! Please seach something else.. "
+        @stores = Store.all.where('lower(city) = ?',"#{params[:search].downcase}")
+        @downcased = Store.pluck(:city).map(&:downcase)
+        unless @downcased.include? "#{params[:search].downcase}"
+           flash.now[:alert] = "No stores for the city '#{params[:search]}' yet! Please seach something else.. "
         end
     else
 
