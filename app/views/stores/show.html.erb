@@ -1,34 +1,43 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @store.name %>
-</p>
+<div class="text-center">
+<h1>
+  <strong><%= @store.name %></strong>
+</h1>
+<pre>
+<table class="table table-bordered">
 
-<p>
-  <strong>Street:</strong>
-  <%= @store.street %>
-</p>
 
-<p>
-  <strong>City:</strong>
-  <%= @store.city %>
-</p>
+    <tr>
+      <td><strong>Street:</strong></td>
+      <td><%= @store.street %></td>
+    </tr>
 
-<p>
-  <strong>Zip:</strong>
-  <%= @store.zip %>
-</p>
+      <tr>
+        <td><strong>City:</strong></td>
+        <td><%= @store.city %></td>
+      </tr>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @store.phone %>
-</p>
+        <tr>
+          <td><strong>Zip:</strong></td>
+          <td><%= @store.zip %></td>
+        </tr>
 
-<p>
-  <strong>Website:</strong>
-  <%= @store.website %>
-</p>
+          <tr>
+            <td><strong>Phone:</strong></td>
+            <td><%= @store.phone %></td>
+          </tr>
 
+            <tr>
+              <td><strong>Website:</strong></td>
+              <td><%= @store.website %></td>
+            </tr>
+
+</table>
+</pre>
+
+</div>
+
+<span class="links-in-show">
 <%= link_to 'Edit', edit_store_path(@store) %> |
 <%= link_to 'Back', stores_path %>
+</span>

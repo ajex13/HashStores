@@ -1,8 +1,18 @@
 
+<% if can? :create, Store.new %>
+<pre>Howdy, <strong>admin</strong>! You're our rockstar so you get to do all of this:
+  1) Create new store
+  2) Update existing store
+  3) Delete a store (remember,with great power..)
+  <%= button_to 'New Store', new_store_path, class: "btn btn-default", method: :get %>
+</pre>
+<% end %>
+
+
 
 <%= form_tag( stores_path, :method => "get", role:"search") do %>
       <div class="input-group">
-        <%= text_field_tag :search, params[:search], placeholder: "Search City" ,class:"form-control", :required => "true" %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search City" ,class:"form-control main-input", :required => "true" %>
         <span class="input-group-btn">
          <%= submit_tag "Search", :name => nil,class: 'btn btn-default' %>
 
@@ -10,11 +20,13 @@
       </div>
 <% end %>
 
+<br>
 
-<% if params[:search] && (@downcased.include? "#{params[:search].downcase}") %>
+
+<% if session[:city_name] && (@downcased.include? "#{session[:city_name]}") %>
 <h1>Stores</h1>
-
-<table class="table table-striped ">
+<pre>
+<table class="table table">
   <thead>
     <tr>
       <th>Name</th>
@@ -36,16 +48,19 @@
         <td><%= store.zip %></td>
         <td><%= store.phone %></td>
         <td><%= store.website %></td>
+        <!--links-->
         <td><%= link_to 'Show', store %></td>
+        <% if can? :create, Store.new %>
         <td><%= link_to 'Edit', edit_store_path(store) %></td>
         <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        <!--links-->
       </tr>
     <% end %>
   </tbody>
 </table>
+</pre>
 <% else %>
 <%= render 'components/jumbotron' %>
 <% end %>
 <br>
-
-<%= link_to 'New Store', new_store_path %>

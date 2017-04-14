@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+html, body,.jumbotron {
+  background-color: #fc932a !important;
+  color: white !important;
+
+}
+
+.main-input {
+  height: 60px;
+  font-size: 20px;
+  line-height: 50px;
+  width: 250px;
+  color: #fc932a !important;
+}
+
+
+.input-group-btn .btn {
+  height: 60px;
+}
+
+.links-in-show a {
+  text-decoration: none;
+  color: white !important;
+  font-weight: strong;
+  
+}

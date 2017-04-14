@@ -1,5 +1,6 @@
 class StoresController < ApplicationController
   before_action :authenticate_user!, except: [:index,:show]
+  load_and_authorize_resource
   before_action :set_store, only: [:show, :edit, :update, :destroy]
 
   # GET /stores
@@ -7,14 +8,21 @@ class StoresController < ApplicationController
   def index
     if params[:search]
 
-
-        @stores = Store.all.where('lower(city) = ?',"#{params[:search].downcase}")
+        session[:city_name] = "#{params[:search].downcase}"
+        @stores = Store.all.where('lower(city) = ?',"#{session[:city_name]}")
         @downcased = Store.pluck(:city).map(&:downcase)
-        unless @downcased.include? "#{params[:search].downcase}"
-           flash.now[:alert] = "No stores for the city '#{params[:search]}' yet! Please seach something else.. "
+        unless @downcased.include? "#{session[:city_name]}"
+           flash.now[:alert] = "No stores for the city '#{session[:city_name]}' yet! Please seach something else.. "
         end
-    else
+    elsif session[:city_name]
+      flash.now[:notice]= "you have selected '#{session[:city_name]}' as your city."
+      @stores = Store.all.where('lower(city) = ?',"#{session[:city_name]}")
+      @downcased = Store.pluck(:city).map(&:downcase)
+      unless @downcased.include? "#{session[:city_name]}"
+         flash.now[:alert] = "No stores for the city '#{session[:city_name]}' yet! Please seach something else.. "
+      end
 
+    else
       flash.now[:notice] = "please select a city to begin!"
     end
   end

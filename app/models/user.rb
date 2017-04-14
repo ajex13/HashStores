@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :permissions
   has_many :roles, through: :permissions
+
+
+  def role? role
+    self.roles.pluck(:name).include? role
+  end
 end
